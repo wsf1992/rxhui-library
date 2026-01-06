@@ -14,29 +14,18 @@ npm install rxhui-library
 
 ```typescript
 // main.ts
-import { createApp } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
-import { sso } from 'rxhui-library'
-import App from './App.vue'
 
-const router = createRouter({
-  history: createWebHistory(),
-  routes: [
-    // 你的路由配置
-  ]
-})
+// 1、引入 SSO
+import { sso } from 'rxhui-library' 
 
-const app = createApp(App)
-app.use(router)
 
-// 安装 SSO 插件（需要在 router 安装之后）
+// 2、安装 SSO 插件（需要在 router 安装之后）
 app.use(sso, {
   baseUrl: 'https://your-api-domain.com',
   loginCallback: (res) => {
     // 登录成功后的回调
     if (res.code === 200) {
       console.log('登录成功', res.data)
-      localStorage.setItem('token', res.data.token)
     }
   }
 })
@@ -48,7 +37,7 @@ app.mount('#app')
 
 ```typescript
 interface SsoOptions {
-  // API 基础地址
+  // API 基础地址，默认与当前页面同源
   baseUrl?: string
   
   // SSO 登录接口路径，默认 '/authAdminService/oauth/sso/login'
@@ -57,13 +46,13 @@ interface SsoOptions {
   // SSO 登出接口路径，默认 '/authAdminService/oauth/sso/logout'
   logoutUrl?: string
   
-  // 登录成功回调函数
+  // 登录回调函数
   loginCallback?: (res: SsoLoginResponse) => void
   
-  // 自定义参数字段映射
+  // 自定义参数字段映射（对应 login 请求中参数取值,例如： login 请求中 clientId 参数默认会从 query.clientId 取值，配置后会从配置后的路由字段取值）
   props?: {
     clientId?: string      // 客户端ID参数名，默认 'clientId'
-    grantType?: string     // 授权类型参数名，默认 'grantType'
+    grantType?: string     // 授权类型参数名，默认 'grantType'  
     tenantId?: string      // 租户ID参数名，默认 'tenantId'
     source?: string        // 渠道参数名，默认 'source'
     socialState?: string   // 第三方登录平台state参数名，默认 'socialState'
