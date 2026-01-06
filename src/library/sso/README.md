@@ -149,21 +149,6 @@ https://your-app.com/callback?code=xxx&source=gitee
 
 Vue 插件安装方法（通过 `app.use()` 调用时自动执行）。
 
-### sso.oauthSsoLogin(params, coverParams?)
-
-执行 SSO 登录操作。
-
-- `params` - 登录参数对象
-- `coverParams` - 是否覆盖参数，默认为 `false`。如果为 `true`，则直接使用 `params` 中的所有参数
-
-```typescript
-// 手动调用登录
-const res = await sso.oauthSsoLogin({
-  source: 'gitee',
-  code: 'xxx',
-  socialState: 'xxx'
-})
-```
 
 ### sso.oauthSsoLogout()
 
