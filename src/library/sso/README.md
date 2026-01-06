@@ -219,15 +219,6 @@ proxy.$sso.setStorage({ customKey: 'customValue' })
 const data = proxy.$sso.getStorage()
 ```
 
-### sso.clearStorage()
-
-清除 sessionStorage 中的 SSO 数据。
-
-```typescript
-// 清除 SSO 数据
-proxy.$sso.clearStorage()
-```
-
 ## 在组件中访问
 
 安装插件后，可以在 Vue 组件中通过 `$sso` 访问实例：
