@@ -13,7 +13,7 @@ jobs:
       id-token: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.TOKEN }}
@@ -62,6 +62,19 @@ jobs:
           git add package.json
           git commit -m "chore: bump version [skip ci]"
           git push
+
+# 添加调试信息
+      - name: Debug before publish
+        run: |
+          echo "=== NPM Version ==="
+          npm --version
+          echo "=== Node Version ==="
+          node --version
+          echo "=== NPM Config ==="
+          npm config list
+          echo "=== Checking for auth tokens ==="
+          cat ~/.npmrc 2>/dev/null || echo "No ~/.npmrc"
+          cat .npmrc 2>/dev/null || echo "No ./.npmrc"
 
       - name: Publish to NPM
         run: npm publish --provenance --access public
