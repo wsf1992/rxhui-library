@@ -22,7 +22,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
 
       # 添加这一步，确保 npm 是最新版本
       - name: Update NPM
@@ -63,13 +62,5 @@ jobs:
           git commit -m "chore: bump version [skip ci]"
           git push
 
-      # 清除 setup-node 创建的认证配置
-      - name: Remove auto-generated auth
-        run: |
-          # 删除 setup-node 创建的临时 .npmrc
-          rm -f /home/runner/work/_temp/.npmrc
-          # 重新配置 registry 但不带 token
-          npm config set registry https://registry.npmjs.org/
-
       - name: Publish to NPM
-        run: npm publish --provenance --access public
+        run: npm publish --provenance --access public --registry=https://registry.npmjs.org/
