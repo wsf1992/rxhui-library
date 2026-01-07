@@ -64,9 +64,7 @@ jobs:
 
 
       - name: Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ""  
         run:  |
-          # 完全清除 token 配置
-          unset NODE_AUTH_TOKEN
-          rm -f ~/.npmrc
-          npm config delete //registry.npmjs.org/:_authToken 2>/dev/null || true 
           npm publish --provenance --access public
