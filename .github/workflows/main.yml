@@ -65,4 +65,4 @@ jobs:
 
 
       - name: Publish to NPM
-        run: npm publish --provenance --access public
+        run: NODE_AUTH_TOKEN="" npm publish --provenance --access public
