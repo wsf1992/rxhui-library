@@ -62,6 +62,6 @@ jobs:
           git push
 
       - name: Publish to NPM
-        run: npm publish --access public
+        run: npm publish
         # env:
         #   NODE_AUTH_TOKEN: ${{ secrets.npm_token }} 
