@@ -21,7 +21,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
 
       # 添加这一步，确保 npm 是最新版本
       - name: Update NPM
@@ -62,5 +63,6 @@ jobs:
           git commit -m "chore: bump version [skip ci]"
           git push
 
+
       - name: Publish to NPM
-        run: npm publish --provenance --access public --registry=https://registry.npmjs.org/
+        run: npm publish --provenance --access public
