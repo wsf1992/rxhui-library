@@ -24,9 +24,8 @@ jobs:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
 
-      # 添加这一步，确保 npm 是最新版本
-      - name: Update NPM
-        run: npm install -g npm@latest
+      - name: Remove NODE_AUTH_TOKEN
+        run: NODE_AUTH_TOKEN=""
 
       - name: Install Dependencies
         run: npm install
@@ -65,4 +64,4 @@ jobs:
 
 
       - name: Publish to NPM
-        run: NODE_AUTH_TOKEN="" npm publish --provenance --access public
+        run: npm publish --provenance --access public
